@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Dte.Common" Version="0.0.36" />
+      <PackageReference Include="MediatR" Version="10.0.1" />
+      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+      <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.14" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Health\V1\Commands" />
+      <Folder Include="Mappings" />
+      <Folder Include="Demographics\V1\Commands" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\BPORHealthConditions.txt" />
+      <None Remove="Resources\ethnicities.json" />
+      <None Remove="Resources\NHSHealthConditions.txt" />
+      <EmbeddedResource Include="Resources\BPORHealthConditions.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Resources\ethnicities.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Resources\NHSHealthConditions.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Sample SAM Template for ReferenceDataApi
+
+Globals:
+  Function:
+    Timeout: 10
+
+Resources:
+  ReferenceDataApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./src/ReferenceDataApi/
+      Handler: ReferenceDataApi::ReferenceDataApi.Function::FunctionHandlerAsync
+      Runtime: dotnetcore3.1
+      Role: arn:aws:iam::536374685097:role/nihr-dte-dev-eu-west-2-lambdaRole
+      MemorySize: 256
+      Environment:
+        Variables:
+          ASPNETCORE_ENVIRONMENT: PassInFromRunConfiguration
+          AWS_SECRET_MANAGER_SECRET_NAME: PassInFromRunConfiguration
+      Events:
+        GetAddressByPostcode:
+          Type: Api
+          Properties:
+            Path: /api/address/{postcode}
+            Method: get
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  ReferenceDataApi:
+    Description: "API Gateway endpoint URL for Prod stage for ReferenceDataApi function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  ReferenceDataApiFunction:
+    Description: "ReferenceDataApi Lambda Function ARN"
+    Value: !GetAtt ReferenceDataApiFunction.Arn
+#  ReferenceDataApiFunctionIamRole:
+#    Description: "Implicit IAM Role created for ReferenceDataApi function"
+#    Value: !GetAtt ReferenceDataApiFunctionRole.Arn
