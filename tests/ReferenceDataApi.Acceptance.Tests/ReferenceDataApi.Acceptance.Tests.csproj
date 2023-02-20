@@ -6,8 +6,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Dte.Api.Acceptance.Test.Helpers" Version="0.0.5" />
-        <PackageReference Include="Dte.Common" Version="0.0.36" />
+        <PackageReference Include="Dte.Api.Acceptance.Test.Helpers" Version="1.0.2" />
+        <PackageReference Include="Dte.Common" Version="1.4.0" />
         <PackageReference Include="FluentAssertions" Version="6.3.0" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.20" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
