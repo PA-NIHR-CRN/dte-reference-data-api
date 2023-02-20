@@ -38,7 +38,7 @@ jobs:
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
           
       - name: Add Nuget Source
-        run: dotnet nuget add source --username ${{ secrets.NUGET_DTE_USERNAME }} --password ${{ secrets.NUGET_DTE_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/nihr-interoperability-platform/index.json"
+        run: dotnet nuget add source --username ${{ secrets.NUGET_PACKAGE_USERNAME }} --password ${{ secrets.NUGET_PACKAGE_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/pa-nihr-crn/index.json"
 
       - name: Install dependencies
         run: dotnet restore
@@ -49,6 +49,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"nihr-interoperability-platform_dte-reference-data-api" /o:"nihr-interoperability-platform" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"PA-NIHR-CRN_dte-reference-data-api" /o:"pa-nihr-crn" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build --configuration Release --no-restore
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
